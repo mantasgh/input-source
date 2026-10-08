@@ -14,3 +14,20 @@ Pass the installed file or bundle path and its input-source ID. Run `./input-sou
 macOS may display a confirmation dialog. Click **Allow** to finish enabling the input source.
 
 Release binaries are not Apple-notarized. If macOS blocks execution, follow [Apple's instructions for opening trusted software](https://support.apple.com/en-us/102445).
+
+## Why not `defaults write`?
+
+For example, this command appends the Lithuanian layout to the saved input-source list:
+
+```sh
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
+'<dict>
+  <key>InputSourceKind</key><string>Keyboard Layout</string>
+  <key>KeyboardLayout ID</key><integer>-4016</integer>
+  <key>KeyboardLayout Name</key><string>U.S. - Lithuanian</string>
+</dict>'
+```
+
+This updates saved preferences but may require logout or restart before the layout appears in the input menu. Repeating `-array-add` can create duplicates.
+
+This tool instead requests enabling through macOS's input-source APIs in the current session.
