@@ -17,7 +17,7 @@ Release binaries are not Apple-notarized. If macOS blocks execution, follow [App
 
 ## Why not `defaults write`?
 
-For example, this command appends the Lithuanian layout to the saved input-source list:
+The following command appends the Lithuanian layout to the saved input-source list:
 
 ```sh
 defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
@@ -28,6 +28,6 @@ defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
 </dict>'
 ```
 
-This updates saved preferences but may require logout or restart before the layout appears in the input menu. Repeating `-array-add` can create duplicates.
+The preference change may require logout or restart before the layout appears in the input menu. Repeating `-array-add` can create duplicates.
 
-This tool instead requests enabling through macOS's input-source APIs in the current session.
+`input-source` instead requests enabling through macOS's input-source APIs in the current session.
